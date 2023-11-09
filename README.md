@@ -10,4 +10,4 @@ Santa's list of good IDG1100 students
 > Sorry if it was though, not sure how to do that lmao
 > Just sending a pull request because the Lab says so, even though I probably did everything wrong!
 
-> The histories' of our projects  were too conflicting, trying to re-do it.
+UPDATE: The histories' of our projects  were too conflicting, trying to re-do it.
