@@ -20,14 +20,14 @@ naughtystudents=()
 awk '{for (i=1; i < NF; i++) printf "%s ", $i; print "\t"$NF}' "$STUDENT_LIST_FILE" > "${PROJECT_TMP_DIR}/split.student.list"
 
 # building student lists
-while IFS=$'\t' read -r name email
+while IFS=$'\t' read -r name email; do
   lcName=${name,,}
     # taking only the 1st matching file; 2>/dev/null supresses error messages
   actualImgFName=$(find "${PROJECT_DIR}/student.images/" -type f -name "${lcName// /.}"'*' 2>/dev/null | head -n 1)
   if (( ${#actualImgFName} > 0 )); then # checking if a file exists
     if file -b --mime "${actualImgFName}" | grep -q "^image/"; then # and is an image
       # good student detected
-       goodStudents=("$(source "$BUILD_STUDENT_SH"  "${name}" "${email}" "/student.images/$(basename "${actualImgFName}")" )")
+       goodStudents=("$(source "$BUILD_STUDENT_SH"   "${name}" "${email}" "/student.images/$(basename "${actualImgFName}")" )")
     fi
   else
     # naughty student detected
@@ -38,6 +38,7 @@ done < "${PROJECT_TMP_DIR}/split.student.list"
 #joining html pieces together
 goodStr=""
 for student in "${goodStudents[@]}"; do
+  goodStr+="${student}"
 done
 naughtyStr=""
 for student in "${naughtystudents[@]}"; do
